@@ -10,5 +10,6 @@ int _abs(int);
 int _islower(int c);
 void jack_bauer(void);
 void times_table(void);
+int add(int, int);
 int _putchar(char c);
 #endif
