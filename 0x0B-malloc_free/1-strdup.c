@@ -10,25 +10,25 @@
  */
 char *_strdup(char *str)
 {
-	int len, i;
-
-	char *ptr;
+	char *cpy;
+	int index, len;
 
 	if (str == NULL)
 		return (NULL);
+	/*determining length of string given*/
+	for (index = 0; str[index]; index++)
+		len++;
+	cpy = malloc(sizeof(char) * (len + 1));
 
-	/*Checking length size*/
-	for (len = 0; str[len] != '\0'; len++)
-
-	ptr = (char *) malloc((len + 1) * sizeof(char));
-
-	if (ptr == NULL)
+	if (cpy == NULL)
 		return (NULL);
+	/* copying @str string into the new string(cpy)*/
+	for (index = 0; str[index]; index++)
+	{
+		cpy[index] = str[index];
+	}
 
-	/*Copying content of @str int new array(ptr)*/
-	for (i = 0; str[i] != '\0'; i++)
-		ptr[i] = str[i];
-	ptr[i] = '\0';
+	cpy[len] = '\0';
 
-	return (ptr);
+	return (cpy);
 }
