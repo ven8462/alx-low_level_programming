@@ -38,15 +38,15 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 	verify(file->e_ident);
-	magic(file->e_ident);
-	class(file->e_ident);
-	data(file->e_ident);
-	version(file->e_ident);
-	osabi(file->e_ident);
+	print_magic(file->e_ident);
+	print_class(file->e_ident);
+	print_data(file->e_ident);
+	print_version(file->e_ident);
+	print_osabi(file->e_ident);
 	printf("  ABI Version:                       ");
 	printf("%i\n", file->e_ident[EI_ABIVERSION]);
-	type(file->e_type, file->e_ident);
-	entry(file->e_entry, file->e_ident);
+	print_type(file->e_type, file->e_ident);
+	print_entry(file->e_entry, file->e_ident);
 	free(file);
 	_close = close(fd);
 	if (_close)
@@ -59,12 +59,12 @@ int main(int argc, char *argv[])
 
 
 /**
-* data - print mthe type of data
+* print_data - print mthe type of data
 * @e_ident: the ELF struct
 * return: no return is a void func.
 */
 
-void data(unsigned char *e_ident)
+void print_data(unsigned char *e_ident)
 {
 	printf("  Data:                              ");
 	if (e_ident[EI_DATA] == ELFDATANONE)
@@ -78,12 +78,12 @@ void data(unsigned char *e_ident)
 }
 
 /**
-* class - print the class of the ELF
+* print_class - print the class of the ELF
 * @e_ident: the ELF struct
 * return: no return is a void func.
 */
 
-void class(unsigned char *e_ident)
+void print_class(unsigned char *e_ident)
 {
 	printf("  Class:                             ");
 	if (e_ident[EI_CLASS] == ELFCLASSNONE)
@@ -97,12 +97,12 @@ void class(unsigned char *e_ident)
 }
 
 /**
-* version - print the version of the file
+* print_version - print the version of the file
 * @e_ident: the ELF struct
 * return: no return is a void func.
 */
 
-void version(unsigned char *e_ident)
+void print_version(unsigned char *e_ident)
 {
 	printf("  Version:                           ");
 	if (e_ident[EI_VERSION] == EV_CURRENT)
@@ -112,13 +112,13 @@ void version(unsigned char *e_ident)
 }
 
 /**
-* type - print the type
+* print_type - print the type
 * @e_ident: the ELF struct
 * @e_type: data to compare and print.
 * return: no return is a void func.
 */
 
-void type(unsigned int e_type, unsigned char *e_ident)
+void print_type(unsigned int e_type, unsigned char *e_ident)
 {
 	e_ident[EI_DATA] == ELFDATA2MSB ? e_type = e_type >> 8 : e_type;
 
@@ -138,13 +138,13 @@ void type(unsigned int e_type, unsigned char *e_ident)
 }
 
 /**
-* entry - print the entry point
+* print_entry - print the entry point
 * @e_ident: the ELF struct
 * @e_entry: the data to print
 * return: no return is a void func.
 */
 
-void entry(unsigned int e_entry, unsigned char *e_ident)
+void print_entry(unsigned int e_entry, unsigned char *e_ident)
 {
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
 		e_entry = REV(e_entry);
@@ -154,13 +154,13 @@ void entry(unsigned int e_entry, unsigned char *e_ident)
 }
 
 /**
- * osabi - print the osabi
- * @e_ident: the ELF struct
+ * print_osabi - print the operating system / ABI used by the elf file.
+ * @e_ident: the ELF struct containing the OS/ABI info
  * return: no return is a void func.
  */
-void osabi(unsigned char *e_ident)
+void print_osabi(unsigned char *e_ident)
 {
-	printf("  OS/ABI:                            ");
+	printf("  OS/ABI:\t\t\t\t");
 	if (e_ident[EI_OSABI] == ELFOSABI_SYSV)
 		printf("UNIX - System V\n");
 	else if (e_ident[EI_OSABI] == ELFOSABI_HPUX)
@@ -186,12 +186,12 @@ void osabi(unsigned char *e_ident)
 }
 
 /**
-* magic - print magic number
+* print_magic - print magic number
 * @e_ident: the ELF struct
 * return: no return is a void func.
 */
 
-void magic(unsigned char *e_ident)
+void print_magic(unsigned char *e_ident)
 {
 	int i; /* the index to count the magic bytes */
 	int limit;
