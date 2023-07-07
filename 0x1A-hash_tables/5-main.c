@@ -24,7 +24,3 @@ int main(void)
     hash_table_print(ht);
     return (EXIT_SUCCESS);
 }
-julien@ubuntu:~/0x1A. Hash tables$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 5-main.c 0-hash_table_create.c 1-djb2.c 2-key_index.c 3-hash_table_set.c 4-hash_table_get.c 5-hash_table_print.c -o f
-julien@ubuntu:~/0x1A. Hash tables$ ./f 
-{}
-{'Betty': 'Cool', 'python': 'awesome', 'Bob': 'and Kris love asm', '98': 'Battery Street', 'N': 'queens', 'c': 'fun', 'Asterix': 'Obelix'}
