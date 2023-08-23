@@ -2,9 +2,7 @@
 
 def island_perimeter(grid):
     """ returns the perimeter of the island described in grid"""
-    if len(grid) > 100 or len(grid[0]) > 100:
-        raise ValueError("must be 100 by 100")
-
+    
     perimeter = 0
 
     for i in range(len(grid)):
